@@ -1,0 +1,10 @@
+.top-bar-container {
+    height: 80px;
+    background: blue;
+    width: calc(100% - 250px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    position: fixed;
+}
