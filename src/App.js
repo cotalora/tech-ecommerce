@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
-import Topbar from './components/Layouts/Topbar.component/Topbar';
-import { Box, Toolbar, Typography } from '@mui/material';
+import NavBar from './components/Layouts/NavBar/NavBar';
+import { Box, Toolbar } from '@mui/material';
 
 function App() {
   const dwWidth = "230";
@@ -9,7 +9,7 @@ function App() {
   return (
     <div id='app'>
       <Box sx={{ display: 'flex' }}>
-        <Topbar drawerWidth={dwWidth} />
+        <NavBar drawerWidth={dwWidth} />
         <Box
           component="main"
           sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${dwWidth}px)` } }}
