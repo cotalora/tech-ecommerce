@@ -1,22 +1,27 @@
-import React, { Component } from 'react';
-import { LeftMenu } from './components/LeftMenu.component/LeftMenu';
-import { Topbar } from './components/Layouts/Topbar.component/Topbar';
 import './App.css';
+import React from 'react';
+import Topbar from './components/Layouts/Topbar.component/Topbar';
+import { Box, Toolbar, Typography } from '@mui/material';
 
-class App extends Component {
-  render() {
-    return (
-      <div id='app'>
-        <LeftMenu />
-        <div className='main-app-container'>
-          <Topbar/ >
-          <div className='content-container'>
-            <h2>CONTENT</h2>
+function App() {
+  const dwWidth = "230";
+
+  return (
+    <div id='app'>
+      <Box sx={{ display: 'flex' }}>
+        <Topbar drawerWidth={dwWidth} />
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${dwWidth}px)` } }}
+        >
+          <Toolbar />
+          <div>
+            CONTENIDO
           </div>
-        </div>
-      </div>
-    )
-  }
+        </Box>
+      </Box>
+    </div>
+  )
 }
 
 export default App;
