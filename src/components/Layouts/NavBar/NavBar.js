@@ -10,7 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import DrawerMenu from '../Drawer/DrawerMenu';
-
+import CartWidget from '../CartWidget/CartWidget';
 
 function NavBar(props) {
     const { window } = props;
@@ -46,9 +46,10 @@ function NavBar(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
+                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
                         TOPBAR
                     </Typography>
+                    <CartWidget />
                 </Toolbar>
             </AppBar>
             <Box
