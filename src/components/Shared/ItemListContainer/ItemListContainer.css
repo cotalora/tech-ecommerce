@@ -2,6 +2,10 @@
     padding: 10px;
     flex: 0 1 25%;
 }
+.button-add-cart {
+    width: 100%;
+    margin-top: 0.70rem !important;
+}
 
 @media screen and (max-width: 1240px) {
     .main-card-container {

@@ -1,4 +1,6 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
+import { Alert, Button, Card, CardContent, CardMedia, Snackbar, Typography } from '@mui/material';
+import { useState } from 'react';
+import ItemCount from '../ItemCount/ItemCount';
 import './ItemListContainer.css';
 
 function ItemListContainer() {
@@ -7,6 +9,8 @@ function ItemListContainer() {
             "id": 1,
             "name": "Xiaomi Redmi Note 11",
             "category": "Smartphone",
+            "stock": 17,
+            "initialQ": 1,
             "price": 789899,
             "imgUrl": "https://itechcolombia.co/wp-content/uploads/2022/05/Redmi-Note-11-Gris-Grafito.png"
         },
@@ -14,6 +18,8 @@ function ItemListContainer() {
             "id": 2,
             "name": "Xiaomi Redmi Note 11",
             "category": "Smartphone",
+            "stock": 0,
+            "initialQ": 1,
             "price": 789899,
             "imgUrl": "https://itechcolombia.co/wp-content/uploads/2022/05/Redmi-Note-11-Gris-Grafito.png"
         },
@@ -21,6 +27,8 @@ function ItemListContainer() {
             "id": 3,
             "name": "Xiaomi Redmi Note 11",
             "category": "Smartphone",
+            "stock": 17,
+            "initialQ": 1,
             "price": 789899,
             "imgUrl": "https://itechcolombia.co/wp-content/uploads/2022/05/Redmi-Note-11-Gris-Grafito.png"
         },
@@ -28,6 +36,8 @@ function ItemListContainer() {
             "id": 4,
             "name": "Xiaomi Redmi Note 11",
             "category": "Smartphone",
+            "stock": 2,
+            "initialQ": 1,
             "price": 789899,
             "imgUrl": "https://itechcolombia.co/wp-content/uploads/2022/05/Redmi-Note-11-Gris-Grafito.png"
         },
@@ -35,6 +45,8 @@ function ItemListContainer() {
             "id": 5,
             "name": "Xiaomi Redmi Note 11",
             "category": "Smartphone",
+            "stock": 9,
+            "initialQ": 1,
             "price": 789899,
             "imgUrl": "https://itechcolombia.co/wp-content/uploads/2022/05/Redmi-Note-11-Gris-Grafito.png"
         },
@@ -42,55 +54,89 @@ function ItemListContainer() {
             "id": 6,
             "name": "Xiaomi Redmi Note 11",
             "category": "Smartphone",
+            "stock": 17,
+            "initialQ": 1,
             "price": 789899,
             "imgUrl": "https://itechcolombia.co/wp-content/uploads/2022/05/Redmi-Note-11-Gris-Grafito.png"
         },
         {
-            "id": 6,
+            "id": 7,
             "name": "Xiaomi Redmi Note 11",
             "category": "Smartphone",
+            "stock": 17,
+            "initialQ": 1,
             "price": 789899,
             "imgUrl": "https://itechcolombia.co/wp-content/uploads/2022/05/Redmi-Note-11-Gris-Grafito.png"
         },
         {
-            "id": 6,
+            "id": 8,
             "name": "Xiaomi Redmi Note 11",
             "category": "Smartphone",
+            "stock": 11,
+            "initialQ": 1,
             "price": 789899,
             "imgUrl": "https://itechcolombia.co/wp-content/uploads/2022/05/Redmi-Note-11-Gris-Grafito.png"
         },
         {
-            "id": 6,
+            "id": 9,
             "name": "Xiaomi Redmi Note 11",
             "category": "Smartphone",
+            "stock": 17,
+            "initialQ": 1,
+            "price": 789899,
+            "imgUrl": "https://itechcolombia.co/wp-content/uploads/2022/05/Redmi-Note-11-Gris-Grafito.png"
+        },
+        {
+            "id": 10,
+            "name": "Xiaomi Redmi Note 11",
+            "category": "Smartphone",
+            "stock": 17,
+            "initialQ": 1,
             "price": 789899,
             "imgUrl": "https://itechcolombia.co/wp-content/uploads/2022/05/Redmi-Note-11-Gris-Grafito.png"
         }
     ];
-    return products.map(x => (
-        <div className='main-card-container'>
-            <Card key={x.id}>
-                    <CardMedia
-                        component="img"
-                        height="140"
-                        image={x.imgUrl}
-                        alt="Producto"
-                    />
-                    <CardContent>
-                        <Typography variant="body2" color="text.secondary">
-                            {x.category}
-                        </Typography>
-                        <Typography gutterBottom variant="h5" component="div">
-                            {x.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Precio: {x.price}
-                        </Typography>
-                    </CardContent>
-            </Card>
-        </div>
-    ))
-        ;
+
+    const [alertMsg, setAlertMsg] = useState('')
+
+    return (
+        <>
+            {
+                products.map(x => (
+                    <div key={x.id} className='main-card-container'>
+                        <Card>
+                            <CardMedia
+                                component="img"
+                                image={x.imgUrl}
+                                alt="Producto"
+                            />
+                            <CardContent>
+                                <Typography variant="body2" color="text.secondary">
+                                    {x.category}
+                                </Typography>
+                                <Typography gutterBottom variant="h5" component="div">
+                                    {x.name}
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    Precio: {x.price}
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    Stock: {x.stock}
+                                </Typography>
+                                <ItemCount initial={x.initialQ} stock={x.stock} showAlertMsg={(evt) => { setAlertMsg(evt) }} />
+                                <Button className='button-add-cart' variant='contained' color='primary'>Agregar al carrito</Button>
+                            </CardContent>
+                        </Card>
+                    </div>
+                ))
+            }
+            <Snackbar open={alertMsg.length > 0} autoHideDuration={6000} onClose={() => {setAlertMsg('')}}>
+                <Alert variant="filled" severity="warning" sx={{ width: '100%' }}>
+                    {alertMsg}
+                </Alert>
+            </Snackbar>
+        </>
+    );
 }
 
 export default ItemListContainer;
