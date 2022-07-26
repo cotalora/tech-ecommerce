@@ -2,7 +2,6 @@ import './ItemListContainer.css';
 import { Alert, Box, CircularProgress, Snackbar } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ItemList from '../ItemList/ItemList';
-import { getProducts } from '../../../productsAsyncMock';
 
 function ItemListContainer() {
     const [alertMsg, setAlertMsg] = useState('');
@@ -10,13 +9,17 @@ function ItemListContainer() {
     const [isLoadingProducts, setIsLoadingProducts] = useState(true);
 
     useEffect(() => {
-        getProducts().then(res => {
-            setProducts(res)
+        fetch('https://api.mercadolibre.com/sites/MCO/search?category=MCO1051', {
+            method: 'GET'
+        }).then(res => {
+            res.json().then(resJson => {
+                setProducts(resJson.results);
+            });
         }).catch(err => {
             console.error(err);
         }).finally(() => {
             setIsLoadingProducts(false);
-        })
+        });
     }, []);
 
     if (isLoadingProducts) {
@@ -30,14 +33,14 @@ function ItemListContainer() {
     }
 
     return (
-        <>
+        <div className='item-list-container'>
             <ItemList products={products} />
             {/*<Snackbar open={alertMsg.length > 0} autoHideDuration={6000} onClose={() => { setAlertMsg('') }}>
                 <Alert variant="filled" severity="warning" sx={{ width: '100%' }}>
                     {alertMsg}
                 </Alert>
             </Snackbar>*/}
-        </>
+        </div>
     );
 }
 
