@@ -15,7 +15,6 @@ function ItemDetailContainer() {
             method: 'GET'
         }).then(res => {
             res.json().then(resJson => {
-                console.log(resJson);
                 setProduct(resJson);
             });
         }).catch(err => {
@@ -37,7 +36,8 @@ function ItemDetailContainer() {
 
     return (
         <div>
-            <ItemDetail productId={product?.id} pictures={product?.pictures} />
+            <ItemDetail productId={product?.id} pictures={product?.pictures} 
+                title={product?.title} price={product?.price} quantity={product?.initial_quantity}/>
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import './Item.css';
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { currencyFormat } from '../Utils/MoneyFormat';
 
 function Item(props) {
     const { id } = props;
@@ -8,12 +9,11 @@ function Item(props) {
     const { category } = props;
     const { name } = props;
     const { price } = props;
-    const { stock } = props;
 
     const navigate = useNavigate();
 
     return (
-        <Card>
+        <Card className="card-container">
             <CardActionArea onClick={() => navigate(`/${id}`)}>
                 <CardMedia
                     component="img"
@@ -27,13 +27,9 @@ function Item(props) {
                     <Typography gutterBottom variant="h5" component="div">
                         {name}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Precio: {price}
+                    <Typography variant="body1" color="text.secondary">
+                        Precio: {currencyFormat(price)}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Stock: {stock}
-                    </Typography>
-                    {/*<ItemCount initial={x.initialQ} stock={x.stock} showAlertMsg={(evt) => { setAlertMsg(evt) }} />*/}
                 </CardContent>
             </CardActionArea>
         </Card>

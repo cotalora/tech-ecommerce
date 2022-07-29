@@ -11,11 +11,14 @@ import Typography from '@mui/material/Typography';
 
 import DrawerMenu from '../Drawer/DrawerMenu';
 import CartWidget from '../CartWidget/CartWidget';
+import { useNavigate } from 'react-router-dom';
 
 function NavBar(props) {
     const { window } = props;
     const { drawerWidth } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    const navigate = useNavigate();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -46,7 +49,7 @@ function NavBar(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, cursor: 'pointer' }} onClick={() => {navigate('/')}}>
                         TOPBAR
                     </Typography>
                     <CartWidget />

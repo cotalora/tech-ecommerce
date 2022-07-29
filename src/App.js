@@ -18,12 +18,10 @@ function App() {
           sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${dwWidth}px)` } }}
         >
           <Toolbar />
-          <BrowserRouter>
             <Routes>
               <Route path="/" element={<ItemListContainer />} />
               <Route path="/:id" element={<ItemDetailContainer />} />
             </Routes>
-          </BrowserRouter>
         </Box>
       </Box>
     </div>

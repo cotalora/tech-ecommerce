@@ -1,9 +1,13 @@
 .counter-container {
     width: 100%;
-    margin-top: 0.70em;
+    flex: 1;
 }
 .button-count {
     flex: 1 1 30%;
+    background: #3d93cc !important;
+    color: #FFFFFF !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
 }
 .button-text-count {
     flex: 1 1 40%;

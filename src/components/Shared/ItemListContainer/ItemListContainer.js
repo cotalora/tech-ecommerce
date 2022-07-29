@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import ItemList from '../ItemList/ItemList';
 
 function ItemListContainer() {
-    const [alertMsg, setAlertMsg] = useState('');
     const [products, setProducts] = useState([]);
     const [isLoadingProducts, setIsLoadingProducts] = useState(true);
 
@@ -35,11 +34,6 @@ function ItemListContainer() {
     return (
         <div className='item-list-container'>
             <ItemList products={products} />
-            {/*<Snackbar open={alertMsg.length > 0} autoHideDuration={6000} onClose={() => { setAlertMsg('') }}>
-                <Alert variant="filled" severity="warning" sx={{ width: '100%' }}>
-                    {alertMsg}
-                </Alert>
-            </Snackbar>*/}
         </div>
     );
 }
