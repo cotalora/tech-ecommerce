@@ -25,11 +25,11 @@ function ItemCount(props) {
 
     const validSubst = (stock) => {
         if (stock > 0) {
-            if (quantity > 0) {
+            if (quantity > 1) {
                 setQuantity(quantity = quantity - 1);
             }
             else {
-                setQuantity(0);
+                setQuantity(1);
                 showAlertMsg('Cantidad no puede ser inferior al Stock');
             }
         }

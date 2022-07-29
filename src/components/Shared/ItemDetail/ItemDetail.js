@@ -104,7 +104,7 @@ function ItemDetail(props) {
                     </Button>
                 </Box>
             </Box>
-            <Snackbar open={alertMsg.length > 0} autoHideDuration={6000} onClose={() => { setAlertMsg('') }}>
+            <Snackbar anchorOrigin={{ vertical:'bottom', horizontal:'right' }} open={alertMsg.length > 0} autoHideDuration={6000} onClose={() => { setAlertMsg('') }}>
                 <Alert variant="filled" severity="warning" sx={{ width: '100%' }}>
                     {alertMsg}
                 </Alert>

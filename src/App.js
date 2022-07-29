@@ -20,7 +20,8 @@ function App() {
           <Toolbar />
             <Routes>
               <Route path="/" element={<ItemListContainer />} />
-              <Route path="/:id" element={<ItemDetailContainer />} />
+              <Route path="/category/:id" element={<ItemListContainer />} />
+              <Route path="/item/:id" element={<ItemDetailContainer />} />
             </Routes>
         </Box>
       </Box>

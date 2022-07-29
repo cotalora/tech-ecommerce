@@ -14,7 +14,7 @@ function Item(props) {
 
     return (
         <Card className="card-container">
-            <CardActionArea onClick={() => navigate(`/${id}`)}>
+            <CardActionArea onClick={() => navigate(`/item/${id}`)}>
                 <CardMedia
                     component="img"
                     image={imgUrl}

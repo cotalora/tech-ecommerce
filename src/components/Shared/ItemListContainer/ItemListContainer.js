@@ -2,13 +2,15 @@ import './ItemListContainer.css';
 import { Alert, Box, CircularProgress, Snackbar } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ItemList from '../ItemList/ItemList';
+import { useParams } from 'react-router-dom';
 
 function ItemListContainer() {
+    const { id } = useParams();
     const [products, setProducts] = useState([]);
     const [isLoadingProducts, setIsLoadingProducts] = useState(true);
 
     useEffect(() => {
-        fetch('https://api.mercadolibre.com/sites/MCO/search?category=MCO1051', {
+        fetch(`https://api.mercadolibre.com/sites/MCO/search?category=${id ? id : 'MCO1051'}`, {
             method: 'GET'
         }).then(res => {
             res.json().then(resJson => {
@@ -19,7 +21,7 @@ function ItemListContainer() {
         }).finally(() => {
             setIsLoadingProducts(false);
         });
-    }, []);
+    }, [id]);
 
     if (isLoadingProducts) {
         return (

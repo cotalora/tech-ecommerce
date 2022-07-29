@@ -50,7 +50,7 @@ function NavBar(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, cursor: 'pointer' }} onClick={() => {navigate('/')}}>
-                        TOPBAR
+                        LOGO
                     </Typography>
                     <CartWidget />
                 </Toolbar>

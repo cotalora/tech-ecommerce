@@ -5,34 +5,41 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import HomeIcon from '@mui/icons-material/Home';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import ListItemText from '@mui/material/ListItemText';
+import { useNavigate } from 'react-router-dom';
 
 function DrawerMenu() {
+    const navigate = useNavigate();
+    
+    const navigateToCategory = (category) => {
+        switch (category) {
+            case 0:
+                navigate('/category/MCO1051');
+                break;
+            case 1:
+                navigate('/category/MCO1039');
+                break;
+            case 2:
+                navigate('/category/MCO1743');
+                break;
+        }
+    }
     return (
         <div>
             <Toolbar />
             <Divider />
             <List>
-                {['ITEM 1', 'ITEM 2', 'ITEM 3', 'ITEM 4'].map((text, index) => (
+                {['Celulares y Smartphones', 'Cámaras y Accesorios', 'Carros, Motos y Otros'].map((text, index) => (
                     <ListItem key={text} disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() => {navigateToCategory(index)}}>
                             <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-            <Divider />
-            <List>
-                {['ITEM 5', 'ITEM 6', 'ITEM 7'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                {index === 0 && <PhoneIphoneIcon />}
+                                {index === 1 && <PhotoCameraIcon />}
+                                {index === 2 && <DirectionsCarIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItemButton>
