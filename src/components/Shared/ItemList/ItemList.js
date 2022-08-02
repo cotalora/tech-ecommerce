@@ -1,8 +1,7 @@
 import './ItemList.css';
 import Item from '../Item/Item';
 
-function ItemList(props) {
-    const { products } = props;
+function ItemList({ products }) {
     return (
         products.map(x => (
             <div key={x.id} className='main-card-container'>

@@ -22,7 +22,7 @@ function ItemDetailContainer() {
         }).finally(() => {
             setIsLoadingProducts(false);
         });
-    }, []);
+    }, [id]);
 
     if (isLoadingProducts) {
         return (
@@ -37,7 +37,7 @@ function ItemDetailContainer() {
     return (
         <div>
             <ItemDetail productId={product?.id} pictures={product?.pictures} 
-                title={product?.title} price={product?.price} quantity={product?.initial_quantity}/>
+                title={product?.title} price={product?.price} stockQuantity={product?.initial_quantity}/>
         </div>
     );
 }
