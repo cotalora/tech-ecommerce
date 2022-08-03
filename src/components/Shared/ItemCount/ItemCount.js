@@ -2,15 +2,15 @@ import { Button, ButtonGroup } from '@mui/material';
 import { useState } from 'react';
 import './ItemCount.css';
 
-function ItemCount({ stock, showAlertMsg, onSetQuantityToItemDetail }) {
+function ItemCount({ stock, showAlertMsg, onAdd }) {
     let [quantity, setQuantity] = useState(1);
 
-    const onAdd = (stock) => {
+    const onAddQuantity = (stock) => {
         if (stock > 0) {
             if (quantity < stock) {
                 setQuantity(quantity = quantity + 1);
                 showAlertMsg('');
-                onSetQuantityToItemDetail(quantity);
+                onAdd(quantity);
             }
             else {
                 setQuantity(quantity);
@@ -22,11 +22,11 @@ function ItemCount({ stock, showAlertMsg, onSetQuantityToItemDetail }) {
         }
     }
 
-    const onSubst = (stock) => {
+    const onSubstQuantity = (stock) => {
         if (stock > 0) {
             if (quantity > 1) {
                 setQuantity(quantity = quantity - 1);
-                onSetQuantityToItemDetail(quantity);
+                onAdd(quantity);
             }
             else {
                 setQuantity(1);
@@ -40,9 +40,9 @@ function ItemCount({ stock, showAlertMsg, onSetQuantityToItemDetail }) {
 
     return (
         <ButtonGroup className='counter-container' variant="outlined" aria-label="outlined button group">
-            <Button className='button-count' onClick={() => { onSubst(stock) }}>-</Button>
+            <Button className='button-count' onClick={() => { onSubstQuantity(stock) }}>-</Button>
             <Button className='button-text-count' disabled>{stock > 0 ? quantity : 0}</Button>
-            <Button className='button-count' onClick={() => { onAdd(stock) }}>+</Button>
+            <Button className='button-count' onClick={() => { onAddQuantity(stock) }}>+</Button>
         </ButtonGroup>
     )
 }

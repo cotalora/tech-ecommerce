@@ -1,36 +1,17 @@
 import './ItemDetail.css';
-import { Alert, Box, Button, MobileStepper, Snackbar, Typography, useTheme } from '@mui/material';
+import { Alert, Box, Button, Snackbar, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
 import ItemCount from '../ItemCount/ItemCount';
 import { currencyFormat } from '../Utils/MoneyFormat';
+import Carousel from 'react-material-ui-carousel';
 
 function ItemDetail({ productId, pictures, title, price, stockQuantity }) {
-    const [activeStep, setActiveStep] = useState(0);
     const [alertMsg, setAlertMsg] = useState('');
     const [itemIsAdd, setItemIsAdd] = useState(false);
     const [quantityItemDetail, setQuantityItemDetail] = useState(1);
     const [itemToCart, setItemToCart] = useState(null);
-
-    const theme = useTheme();
-    const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
     const navigate = useNavigate();
-
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleStepChange = (step) => {
-        setActiveStep(step);
-    };
 
     const onAddToCart = () => {
         setItemToCart({
@@ -45,57 +26,25 @@ function ItemDetail({ productId, pictures, title, price, stockQuantity }) {
     useEffect(() => {
         if (itemToCart) {
             setItemIsAdd(true);
-            // console.log(itemToCart); // Producto agregado al carrito
+            console.log(itemToCart); // Producto agregado al carrito
         }
     }, [itemToCart]);
 
     return (
         <Box className='item-main-container'>
             <Box className='carousel-container'>
-                <AutoPlaySwipeableViews
-                    axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                    interval={60000}
-                    index={activeStep}
-                    onChangeIndex={handleStepChange}
-                    enableMouseEvents
-                >
-                    {pictures?.map((step, index) => (
-                        <div key={step.id}>
-                            {Math.abs(activeStep - index) <= 2 ? (
+                <Carousel
+                    interval={5000}>
+                    {
+                        pictures?.map((step, index) => (
+                            <div key={step.id}>
                                 <Box className='background-image-item'>
                                     <img src={step.url} alt={title} loading="lazy" />
                                 </Box>
-                            ) : null}
-                        </div>
-                    ))}
-                </AutoPlaySwipeableViews>
-                <MobileStepper
-                    steps={pictures?.length || 0}
-                    position="static"
-                    activeStep={activeStep}
-                    nextButton={
-                        <Button
-                            size="small"
-                            onClick={handleNext}
-                            disabled={activeStep === pictures?.length - 1}
-                        >
-                            {theme.direction === 'rtl' ? (
-                                <KeyboardArrowLeft />
-                            ) : (
-                                <KeyboardArrowRight />
-                            )}
-                        </Button>
+                            </div>
+                        ))
                     }
-                    backButton={
-                        <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                            {theme.direction === 'rtl' ? (
-                                <KeyboardArrowRight />
-                            ) : (
-                                <KeyboardArrowLeft />
-                            )}
-                        </Button>
-                    }
-                />
+                </Carousel>
             </Box>
             <Box className="info-item-container">
                 <Typography className='category-text'>CELULARES Y SMARTPHONES</Typography>
@@ -117,7 +66,7 @@ function ItemDetail({ productId, pictures, title, price, stockQuantity }) {
                     {
                         !itemIsAdd ?
                             <>
-                                <ItemCount stock={stockQuantity} showAlertMsg={setAlertMsg} onSetQuantityToItemDetail={setQuantityItemDetail} />
+                                <ItemCount stock={stockQuantity} showAlertMsg={setAlertMsg} onAdd={setQuantityItemDetail} />
                                 <Button className="button-add-to-cart" onClick={onAddToCart}>
                                     Añadir al carrito
                                 </Button>
