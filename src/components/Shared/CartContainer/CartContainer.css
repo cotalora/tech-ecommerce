@@ -1,0 +1,23 @@
+.cart-product-main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cart-product-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.cart-product-image {
+    Width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    background: #FFFFFF;
+}
+
+.cart-product-image img {
+    height: 100%;
+}

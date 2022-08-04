@@ -1,11 +1,11 @@
 import { Button, ButtonGroup } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './ItemCount.css';
 
-function ItemCount({ stock, showAlertMsg, onAdd }) {
+function ItemCount({ initialValue, stock, showAlertMsg, onAdd }) {
     let [quantity, setQuantity] = useState(1);
 
-    const onAddQuantity = (stock) => {
+    const onAddQuantity = () => {
         if (stock > 0) {
             if (quantity < stock) {
                 setQuantity(quantity = quantity + 1);
@@ -22,7 +22,7 @@ function ItemCount({ stock, showAlertMsg, onAdd }) {
         }
     }
 
-    const onSubstQuantity = (stock) => {
+    const onSubstQuantity = () => {
         if (stock > 0) {
             if (quantity > 1) {
                 setQuantity(quantity = quantity - 1);
@@ -37,6 +37,10 @@ function ItemCount({ stock, showAlertMsg, onAdd }) {
             showAlertMsg('No hay Stock');
         }
     }
+
+    useEffect(() => {
+        setQuantity(initialValue);
+    }, [initialValue]);
 
     return (
         <ButtonGroup className='counter-container' variant="outlined" aria-label="outlined button group">

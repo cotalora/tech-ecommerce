@@ -1,34 +1,33 @@
 import './ItemDetail.css';
 import { Alert, Box, Button, Snackbar, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import ItemCount from '../ItemCount/ItemCount';
 import { currencyFormat } from '../Utils/MoneyFormat';
 import Carousel from 'react-material-ui-carousel';
+import { CartContext } from '../../../contexts/CartContext';
 
 function ItemDetail({ productId, pictures, title, price, stockQuantity }) {
     const [alertMsg, setAlertMsg] = useState('');
     const [itemIsAdd, setItemIsAdd] = useState(false);
     const [quantityItemDetail, setQuantityItemDetail] = useState(1);
-    const [itemToCart, setItemToCart] = useState(null);
+
+    const { addItem, getItemQuantity } = useContext(CartContext);
+
+    const quantityAdded = getItemQuantity(productId);
+
     const navigate = useNavigate();
 
     const onAddToCart = () => {
-        setItemToCart({
+        addItem({
             productId: productId,
             title: title,
             price: price,
             quantity: quantityItemDetail,
             pictures: pictures
         });
+        setItemIsAdd(true);
     }
-
-    useEffect(() => {
-        if (itemToCart) {
-            setItemIsAdd(true);
-            console.log(itemToCart); // Producto agregado al carrito
-        }
-    }, [itemToCart]);
 
     return (
         <Box className='item-main-container'>
@@ -66,7 +65,7 @@ function ItemDetail({ productId, pictures, title, price, stockQuantity }) {
                     {
                         !itemIsAdd ?
                             <>
-                                <ItemCount stock={stockQuantity} showAlertMsg={setAlertMsg} onAdd={setQuantityItemDetail} />
+                                <ItemCount initialValue={quantityAdded || 1} stock={stockQuantity} showAlertMsg={setAlertMsg} onAdd={setQuantityItemDetail} />
                                 <Button className="button-add-to-cart" onClick={onAddToCart}>
                                     Añadir al carrito
                                 </Button>
