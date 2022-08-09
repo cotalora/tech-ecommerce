@@ -18,6 +18,51 @@
     background: #FFFFFF;
 }
 
+.table-container {
+    max-height: 500px;
+}
+
 .cart-product-image img {
     height: 100%;
+}
+
+.header-table th {
+    font-weight: 600;
+}
+
+.footer-table td {
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.img-container-product-table {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-product-table {
+    height: 100px;
+}
+
+.img-empty-cart-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.img-empty-cart-container img {
+    margin: 0px 0px 0px 80px;
+}
+
+.msg-main-empty-cart {
+    margin: 20px 0px 0px 0px !important;
+    font-size: 25px !important;
+    font-weight: 600 !important;
+}
+
+.msg-empty-cart {
+    font-size: 15px !important;
 }

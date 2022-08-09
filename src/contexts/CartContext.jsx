@@ -1,8 +1,11 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { NotificationContext } from "./NotificationContext";
 
-export const CartContext = createContext();
+export const CartContext = createContext([]);
 
 export const CartContextProvider = ({ children }) => {
+
+    const { open, handleOpen } = useContext(NotificationContext);
 
     const [cart, setCart] = useState([]);
 
@@ -21,6 +24,7 @@ export const CartContextProvider = ({ children }) => {
             })
             setCart(itemRef);
         }
+        handleOpen({msg: 'Producto añadido al carrito', variant: 'success'});
     }
 
     const getItemsQuantity = () => {
@@ -38,6 +42,7 @@ export const CartContextProvider = ({ children }) => {
 
     const removeItem = (item) => {
         setCart(cart.filter(x => x.productId !== item.productId));
+        handleOpen({msg: 'Producto eliminado del carrito', variant: 'success'});
     }
 
     const clear = () => {
