@@ -66,3 +66,17 @@
 .msg-empty-cart {
     font-size: 15px !important;
 }
+
+.button-empty-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+.button-empty-container button {
+    background: #3d93cc !important;
+    color: #FFFFFF !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    margin: 20px 0px 0px 0px;
+    text-transform: none !important;
+}

@@ -1,4 +1,4 @@
-import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Button, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../../../contexts/CartContext';
 import './CartContainer.css';
@@ -8,7 +8,7 @@ import cartImg from '../../../assets/img/cart.png';
 
 export const CartContainer = () => {
 
-  const { cart, removeItem } = useContext(CartContext);
+  const { cart, removeItem, clear } = useContext(CartContext);
 
   const [cartItems, setCartItems] = useState([]);
 
@@ -22,6 +22,7 @@ export const CartContainer = () => {
 
   return (
     cart.length > 0 ?
+    <>
     <TableContainer className='table-container' component={Paper}>
       <Table stickyHeader aria-label="sticky table">
         <TableHead>
@@ -57,6 +58,10 @@ export const CartContainer = () => {
         </TableBody>
       </ Table>
     </ TableContainer>
+    <Box className='button-empty-container'>
+      <Button variant="outlined" onClick={clear}>Vaciar carrito</Button>
+    </Box>
+    </>
     :
     <Box className='img-empty-cart-container'>
       <img className='img-empty-cart' src={cartImg} alt='empty cart' />
