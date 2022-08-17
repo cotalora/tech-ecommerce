@@ -49,7 +49,7 @@ function ItemDetailContainer() {
     return (
         <div>
             <ItemDetail productId={product?.id} pictures={product?.pictures || [{id: 1, url: product?.thumbnail}]} 
-                title={product?.title} price={product?.price} stockQuantity={product?.initial_quantity || 2}/>
+                title={product?.title} price={product?.price} stockQuantity={product?.initial_quantity}/>
         </div>
     );
 }

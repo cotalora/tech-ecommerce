@@ -67,16 +67,49 @@
     font-size: 15px !important;
 }
 
-.button-empty-container {
+.buttons-container {
     display: flex;
     width: 100%;
     justify-content: flex-end;
+    gap: 20px;
+    margin: 20px 0px 0px 0px;
 }
-.button-empty-container button {
+.button-create {
     background: #3d93cc !important;
     color: #FFFFFF !important;
     font-size: 15px !important;
     font-weight: 700 !important;
-    margin: 20px 0px 0px 0px;
     text-transform: none !important;
+}
+.button-clear {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    text-transform: none !important;
+    border: 2px solid;
+}
+
+.loading-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background: #0000005d;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+}
+
+.form-checkout-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 400px;
+}
+
+.buttons-dialog-container {
+    margin: 0px 18px 18px 0px;
+    display: flex;
+    gap: 20px;
 }

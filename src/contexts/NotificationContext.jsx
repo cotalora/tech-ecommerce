@@ -29,7 +29,7 @@ export const NotificationContextProvider = ({ children }) => {
                 onClose={handleClose}
                 autoHideDuration={3000}
             >
-                <Alert severity={variantSnackbar}>{msgSnackbar}</Alert>
+                <Alert severity={variantSnackbar || 'info'}>{msgSnackbar}</Alert>
             </ Snackbar>
             {children}
         </NotificationContext.Provider>

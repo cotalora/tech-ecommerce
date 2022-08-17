@@ -1,6 +1,6 @@
 import './ItemDetail.css';
 import { Alert, Box, Button, Snackbar, Typography } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import ItemCount from '../ItemCount/ItemCount';
 import { currencyFormat } from '../Utils/MoneyFormat';
@@ -10,7 +10,7 @@ import { CartContext } from '../../../contexts/CartContext';
 function ItemDetail({ productId, pictures, title, price, stockQuantity }) {
     const [alertMsg, setAlertMsg] = useState('');
     const [itemIsAdd, setItemIsAdd] = useState(false);
-    const [quantityItemDetail, setQuantityItemDetail] = useState(1);
+    const [quantityItemDetail, setQuantityItemDetail] = useState(0);
 
     const { addItem, getItemQuantity } = useContext(CartContext);
 
@@ -19,15 +19,27 @@ function ItemDetail({ productId, pictures, title, price, stockQuantity }) {
     const navigate = useNavigate();
 
     const onAddToCart = () => {
-        addItem({
-            productId: productId,
-            title: title,
-            price: price,
-            quantity: quantityItemDetail,
-            pictures: pictures
-        });
-        setItemIsAdd(true);
+        if (quantityItemDetail > 0) {
+            addItem({
+                productId: productId,
+                title: title,
+                price: price,
+                quantity: quantityItemDetail,
+                pictures: pictures
+            });
+            setItemIsAdd(true);
+        }
+        else {
+            setAlertMsg('No hay stock');
+        }
     }
+
+    useEffect(() => {
+        setQuantityItemDetail(0);
+        if (stockQuantity > 0) {
+            setQuantityItemDetail(1);
+        }
+    }, [stockQuantity]);
 
     return (
         <Box className='item-main-container'>

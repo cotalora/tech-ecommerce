@@ -5,7 +5,6 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import HomeIcon from '@mui/icons-material/Home';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
