@@ -5,8 +5,8 @@ import './CartContainer.css';
 import { currencyFormat } from '../Utils/MoneyFormat';
 import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
 import cartImg from '../../../assets/img/cart.png';
-import { addDoc, collection, doc, getDoc, Timestamp, updateDoc } from 'firebase/firestore';
-import { db } from '../../../service/firebase/index.js';
+import { Timestamp } from 'firebase/firestore';
+import { addOrder, getProduct, updateProduct } from '../../../service/firebase/firestore';
 
 export const CartContainer = () => {
 
@@ -51,24 +51,24 @@ export const CartContainer = () => {
 
       setIsLoadingCart(true);
 
-      addDoc(collection(db, 'orders'), objOrder).then(resAdd => {
+      addOrder(objOrder).then(() => {
         objOrder.items.map(item => {
-          getDoc((doc(db, 'products', item.productId))).then(resGet => {
-            updateDoc(doc(db, 'products', item.productId), { initial_quantity: resGet.data().initial_quantity - item.quantity }).then(() => {
+          return getProduct(item.productId).then(resGet => {
+            updateProduct(item.productId, { initial_quantity: resGet.data().initial_quantity - item.quantity }).then(() => {
               clear();
               setIsLoadingCart(false);
               handleCloseDialog();
               setAlertMsg({ type: 'success', msg: 'Orden creada correctamente' });
-            }).catch(err => {
+            }).catch(() => {
               setIsLoadingCart(false);
               setAlertMsg({ type: 'error', msg: 'Error, la orden no se ha podido crear' });
             });
-          }).catch(err => {
+          }).catch(() => {
             setIsLoadingCart(false);
             setAlertMsg({ type: 'error', msg: 'Error, la orden no se ha podido crear' });
           });
         });
-      }).catch(err => {
+      }).catch(() => {
         setIsLoadingCart(false);
         setAlertMsg({ type: 'error', msg: 'Error, la orden no se ha podido crear' });
       });
